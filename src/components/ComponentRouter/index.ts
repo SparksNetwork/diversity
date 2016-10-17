@@ -8,7 +8,7 @@ import { RouteDefinitions } from 'switch-path';
 import { RouterSource } from 'cyclic-router/lib/RouterSource';
 import { Pathname } from '@cycle/history/lib/interfaces';
 import { eqProps, prop, merge } from 'ramda';
-import { propOrNever } from '../../util';
+import { propOrNever } from '../../utils';
 
 const equalPaths = eqProps('path');
 
@@ -48,7 +48,7 @@ function ComponentRouter(sources: ComponentRouterSources): ComponentRouterSinks 
 
   return {
     DOM: component$.map(prop('DOM')).switch().multicast(),
-    route$: component$.map(prop('route$')).switch().multicast(),
+    route$: component$.map(propOrNever('route$')).switch().multicast(),
     pluck: (key: string) => component$.map(propOrNever(key)).switch().multicast()
   };
 }

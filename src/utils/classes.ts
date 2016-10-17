@@ -1,11 +1,11 @@
-import {assoc} from 'ramda'
-const styleguide = require('../styleguide.scss')
+import { assoc } from 'ramda';
+const styleguide = require('../styleguide.scss');
 
-class ClassesImpl {
-  private styles
+class CSSClasses {
+  private styles;
 
-  constructor(styles:any) {
-    this.styles = Object.assign({}, styleguide, styles)
+  constructor(styles: any) {
+    this.styles = Object.assign({}, styleguide, styles);
   }
 
   /**
@@ -14,7 +14,7 @@ class ClassesImpl {
    * @returns {string[]}
    */
   list(...classes: string[]) {
-    return classes.map(style => this.styles[style] || style)
+    return classes.map(style => this.styles[style] || style);
   }
 
   /**
@@ -25,7 +25,7 @@ class ClassesImpl {
   sel(...classes: string[]) {
     return this.list.apply(this, classes)
       .map(className => '.' + className)
-      .join('')
+      .join('');
   }
 
   /**
@@ -36,8 +36,8 @@ class ClassesImpl {
   map(...classes: string[]) {
     return this.list.apply(this, classes)
       .reduce((acc, className) =>
-          assoc(className, true, acc),
-        {})
+        assoc(className, true, acc),
+      {});
   }
 }
 
@@ -46,12 +46,12 @@ class ClassesImpl {
  * require('styles.css') and then use the functions on the returned object for
  * modulized class names in various formats:
  *
- *   const classes = Classes(require('styles.scss'))
+ *   const classes = cssClasses(require('styles.scss'))
  *   div(classes.sel('one', 'two')) => <div class="one two"></div>
  *
  * @param styles
- * @returns {ClassesImpl}
+ * @returns {CSSClasses}
  */
-export function Classes(styles:any) {
-  return new ClassesImpl(styles)
+export function cssClasses(styles: any) {
+  return new CSSClasses(styles);
 }
