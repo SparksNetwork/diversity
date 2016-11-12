@@ -79,7 +79,7 @@
     "mocha-circleci-reporter": "0.0.2",
     "mocha-webpack": "^0.7.0",
     "nightwatch": "^0.9.8",
-    "node-sass": "^3.8.0",
+    "node-sass": "^3.11.0",
     "null-loader": "^0.1.1",
     "postcss-loader": "^0.11.0",
     "pushstate-server": "^2.0.0",
