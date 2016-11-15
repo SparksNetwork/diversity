@@ -109,7 +109,7 @@
     "@motorcycle/dom": "^3.0.0",
     "cyclic-router": "^3.0.0",
     "es6-shim": "^0.35.1",
-    "firebase": "^3.3.0",
+    "firebase": "^3.6.1",
     "history": "^3.0.0",
     "most": "^1.0.4",
     "most-proxy": "^3.1.1",
