@@ -60,7 +60,7 @@
     "sauceconnect-runner": "^0.2.2",
     "selenium-server": "^3.0.1",
     "ts-node": "^1.7.0",
-    "tslint": "^4.0.0-dev.1",
+    "tslint": "^4.0.1",
     "typescript": "^2.2.0-dev.20161117",
     "validate-commit-msg": "^2.8.2",
     "webpack": "^2.1.0-beta.27",
