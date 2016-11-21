@@ -79,6 +79,6 @@
     "firebase": "^3.6.1",
     "most": "^1.1.0",
     "ramda": "^0.22.1",
-    "typestyle": "^0.7.3"
+    "typestyle": "^0.8.0"
   }
 }
