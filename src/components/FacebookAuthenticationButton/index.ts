@@ -1,11 +1,7 @@
 import { Stream, constant, just, startWith } from 'most';
-import { VNode, button } from '@motorcycle/dom';
+import { DOMSource, VNode, button } from '@motorcycle/dom';
 import { REDIRECT, GET_REDIRECT_RESULT, AuthenticationType }
   from '../../drivers/firebase-authentication';
-import {
-  FacebookAuthenticationButtonSources,
-  FacebookAuthenticationButtonSinks,
-} from './types';
 import firebase = require('firebase');
 
 export function Button(
@@ -51,3 +47,12 @@ const style =
 
 const view: VNode =
   button(facebookButtonId + classNames, { style }, [ 'Sign in with Facebook' ]);
+
+export interface FacebookAuthenticationButtonSources {
+  dom: DOMSource;
+}
+
+export interface FacebookAuthenticationButtonSinks {
+  dom: Stream<VNode>;
+  authentication$: Stream<AuthenticationType>;
+}
