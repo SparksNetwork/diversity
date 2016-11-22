@@ -53,11 +53,6 @@ const ImageLoader = {
   ],
 };
 
-const JsonLoader = {
-  test: /\.json$/,
-  loaders: [ 'json-loader' ],
-};
-
 const config: webpack.Configuration = {
   plugins,
 
@@ -88,7 +83,6 @@ const config: webpack.Configuration = {
       TSLoader,
       SASSLoader,
       ImageLoader,
-      JsonLoader,
     ],
   },
 
