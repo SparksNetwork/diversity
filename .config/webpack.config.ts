@@ -53,6 +53,11 @@ const ImageLoader = {
   ],
 };
 
+const JsonLoader = {
+  test: /\.json$/,
+  loaders: [ 'json-loader' ],
+};
+
 const config: webpack.Configuration = {
   plugins,
 
@@ -83,12 +88,13 @@ const config: webpack.Configuration = {
       TSLoader,
       SASSLoader,
       ImageLoader,
+      JsonLoader,
     ],
   },
 
   resolve: {
     // module and jsnext:main are for tree-shaking compatibility
-    mainFields: ['module', 'jsnext:main', 'main'],
+    mainFields: ['module', 'jsnext:main', 'browser', 'main'],
     extensions: ['.ts', '.js', '.json'],
     alias: {
       assets: assetsPath,
