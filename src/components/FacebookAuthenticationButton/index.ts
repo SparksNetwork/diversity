@@ -15,7 +15,8 @@ export function Button(
     dom.select(facebookButtonId).events('click');
 
   const authentication$: Stream<AuthenticationType> =
-    startWith(getRedirectResult, constant(facebookRedirectAuthentication, click$));
+    startWith(redirectResultAuthenticationType,
+      constant(facebookRedirectAuthentication, click$));
 
   const view$: Stream<VNode> = just(view);
 
@@ -25,7 +26,7 @@ export function Button(
   };
 }
 
-const getRedirectResult: AuthenticationType =
+const redirectResultAuthenticationType: AuthenticationType =
   { method: GET_REDIRECT_RESULT };
 
 const facebookRedirectAuthentication: AuthenticationType =
