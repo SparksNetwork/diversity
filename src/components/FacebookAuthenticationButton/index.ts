@@ -30,7 +30,7 @@ export function Button(
 }
 
 const getRedirectResult: AuthenticationType =
-  { method: GET_REDIRECT_RESULT }
+  { method: GET_REDIRECT_RESULT };
 
 const facebookRedirectAuthentication: AuthenticationType =
   {
