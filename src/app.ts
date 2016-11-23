@@ -4,11 +4,10 @@ import { makeRouterDriver } from '@motorcycle/router';
 import { Stream } from 'most';
 import { makeFirebaseAuthenticationDriver, Authentication, AuthenticationType }
   from './drivers/firebase-authentication';
-import firebase = require('firebase');
+import * as firebase from 'firebase';
+import './style.scss';
 
-require('./style.scss');
-
-import { App, AppSources, AppSinks } from './App';
+import {App, AppSources, AppSinks} from './App/index';
 
 export interface MainSources {
   dom: DOMSource;

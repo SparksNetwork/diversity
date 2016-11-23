@@ -2,7 +2,7 @@ import { Stream, constant, just, startWith } from 'most';
 import { DOMSource, VNode, button } from '@motorcycle/dom';
 import { REDIRECT, GET_REDIRECT_RESULT, AuthenticationType }
   from '../../drivers/firebase-authentication';
-import firebase = require('firebase');
+import * as firebase from 'firebase';
 
 export function FacebookAuthenticationButton(
   sources: FacebookAuthenticationButtonSources): FacebookAuthenticationButtonSinks
