@@ -1,40 +1,32 @@
-import 'es6-shim';
+import { DriverFn, run } from '@motorcycle/core';
+import { DOMSource, VNode, makeDOMDriver } from '@motorcycle/dom';
+import { makeRouterDriver } from '@motorcycle/router';
+import { Stream } from 'most';
+import { makeFirebaseAuthenticationDriver, Authentication, AuthenticationType }
+  from './drivers/firebase-authentication';
+import * as firebase from 'firebase';
+import './style.scss';
 
-import Cycle from '@cycle/most-run';
-import { makeDOMDriver, AttrsModule, ClassModule, StyleModule, PropsModule } from '@motorcycle/dom';
-import { makeRouterDriver } from 'cyclic-router';
-import { createHistory } from 'history';
-import firebase = require('firebase');
-import { makeFirebaseDriver, makeQueueDriver } from './drivers/cyclic-fire';
-import { makeFirebaseAuthenticationDriver } from './drivers/firebase-authentication';
-import { preventDefault } from './drivers/prevent-default';
-import switchPath from 'switch-path';
-import { just } from 'most';
+import {App, AppSources, AppSinks} from './App/index';
 
-import { makePolyglotModule } from './ui/modules/polyglot';
-import { main } from './main';
+export interface MainSources {
+  dom: DOMSource;
+  authentication$: Stream<Authentication>;
+}
 
-const modules = [
-  makePolyglotModule(require('./translations')),
-  PropsModule,
-  StyleModule,
-  ClassModule,
-  AttrsModule
-];
+export interface MainSinks {
+  dom: Stream<VNode>;
+  authentication$: Stream<AuthenticationType>;
+}
 
-declare const Sparks;
+// injected via Webpack
+declare const Sparks: any;
+
+// initialize connection to Firebase
 firebase.initializeApp(Sparks.firebase);
 
-const firebaseRef = firebase.database().ref();
-
-const drivers = {
-  DOM: makeDOMDriver('#app', { transposition: false, modules }),
-  router: makeRouterDriver(createHistory() as any, switchPath),
-  authentication$: makeFirebaseAuthenticationDriver(firebase),
-  firebase: makeFirebaseDriver(firebaseRef),
-  queue$: makeQueueDriver(firebaseRef.child('!queue')),
-  preventDefault,
-  random: () => just(Math.random())
-};
-
-Cycle.run(main, drivers);
+run<AppSources, AppSinks>(App, {
+  dom: makeDOMDriver('#sparks-app') as DriverFn,
+  router: makeRouterDriver(),
+  authentication$: makeFirebaseAuthenticationDriver(firebase) as DriverFn,
+});

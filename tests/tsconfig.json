@@ -7,6 +7,7 @@
     "target": "es5",
     "lib": [
       "dom",
+      "es5",
       "es2015"
     ],
     "noImplicitAny": true,
@@ -20,14 +21,15 @@
       "ramda",
       "webpack",
       "webpack-dev-server"
-    ]
+    ],
+    "outDir": "./.tmp"
   },
   "formatCodeOptions": {
     "indentSize": 2,
     "tabSize": 2
   },
   "include": [
-    "custom-typings/*.d.ts",
-    "src/app.ts"
+    "../custom-typings/*.d.ts",
+    "./e2e/*.ts"
   ]
 }

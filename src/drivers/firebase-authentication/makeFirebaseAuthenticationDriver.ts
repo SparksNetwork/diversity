@@ -1,6 +1,6 @@
 import { Stream, just } from 'most';
 import hold from '@most/hold';
-import firebase = require('firebase');
+import * as firebase from 'firebase';
 import { AuthenticationType, Authentication } from './types';
 import { createUserCredential$ } from './createUserCredential$';
 import { defaultUserCredential } from './defaultUserCredential';
@@ -30,13 +30,13 @@ function convertUserCredentialToAuthenticationOutput(
     userCredential: firebase.auth.UserCredential): Authentication  {
   return {
     error: null,
-    userCredential
+    userCredential,
   };
 }
 
 function createDefaultAuthenticationOutput$(error: firebase.auth.Error) {
   return just<Authentication>({
     error: new AuthenticationError(error.code, error.message),
-    userCredential: defaultUserCredential
+    userCredential: defaultUserCredential,
   });
 }
