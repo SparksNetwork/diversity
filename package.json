@@ -65,7 +65,7 @@
     "sauceconnect-runner": "^0.2.2",
     "selenium-server": "^3.0.1",
     "style-loader": "^0.13.1",
-    "ts-node": "^1.7.0",
+    "ts-node": "^1.7.1",
     "tslint": "^4.0.0-dev.2",
     "typescript": "^2.2.0-dev.20161118",
     "validate-commit-msg": "^2.8.2",
