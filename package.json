@@ -66,7 +66,7 @@
     "selenium-server": "^3.0.1",
     "style-loader": "^0.13.1",
     "ts-node": "^1.7.0",
-    "tslint": "^4.0.0-dev.2",
+    "tslint": "^4.1.1",
     "typescript": "^2.2.0-dev.20161118",
     "validate-commit-msg": "^2.8.2",
     "webpack": "^2.1.0-beta.27",
