@@ -1,11 +1,11 @@
 import { Stream } from 'most';
 import { Router } from '@motorcycle/router';
-import { MainSources, MainSinks } from '../app';
+import { MainSources, MainSinks } from './app';
 
-import { ConnectScreen } from './connect';
-import { SignInScreen } from './signin';
-import { Dash } from './dash';
-import { Home } from './home';
+import { ConnectScreen } from './features/connect';
+import { SignInScreen } from './features/signin';
+import { Dash } from './features/dash';
+import { Home } from './features/home';
 
 export function main(sources: MainSources): MainSinks {
   const sinks$: Stream<MainSinks> =

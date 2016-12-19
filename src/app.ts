@@ -38,7 +38,7 @@ export interface MainSinks {
   authentication$: Stream<AuthenticationType>;
 }
 
-import { main } from './features';
+import { main } from './main';
 
 const auth = firebase.auth();
 
