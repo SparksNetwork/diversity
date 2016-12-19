@@ -1,5 +1,4 @@
 import { Stream, just } from 'most';
-import { DriverFn } from '@motorcycle/core';
 import hold from '@most/hold';
 import firebase = require('firebase');
 import { AuthenticationType, Authentication } from './types';
@@ -7,7 +6,7 @@ import { createUserCredential$ } from './createUserCredential$';
 import { defaultUserCredential } from './defaultUserCredential';
 import { AuthenticationError } from './AuthenticationError';
 
-export function makeFirebaseAuthenticationDriver(firebaseInstance: any): DriverFn {
+export function makeFirebaseAuthenticationDriver(firebaseInstance: any) {
   return function firebaseAuthenticationDriver(sink$: Stream<AuthenticationType>):
       Stream<Authentication> {
     const authentication$ = sink$.map((authenticationInput) => {
