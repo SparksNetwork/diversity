@@ -1,5 +1,5 @@
 import { Stream, just, merge } from 'most';
-import { Pathname } from '@motorcycle/history';
+import { Path } from '@motorcycle/history';
 import { div, ul, li, img, label, span, a, button, input, form } from '@motorcycle/dom';
 import { MainSources, MainSinks } from '../../app';
 import {
@@ -13,15 +13,15 @@ const googleIcon = require('assets/images/google.svg');
 const facebookIcon = require('assets/images/facebook.svg');
 
 export function SignInScreen(sources: MainSources): MainSinks {
-  const redirectToDashboard$: Stream<Pathname> =
+  const redirectToDashboard$: Stream<Path> =
     sources.isAuthenticated$.filter(Boolean).constant('/dash');
 
-  const nav$: Stream<Pathname> =
+  const nav$: Stream<Path> =
     sources.dom.select('a').events('click')
         .tap(evt => evt.preventDefault())
         .map(ev => (ev.target as HTMLAnchorElement).pathname);
 
-  const router: Stream<Pathname> =
+  const router: Stream<Path> =
       merge(nav$, redirectToDashboard$);
 
   const googleClick$: Stream<Event> =

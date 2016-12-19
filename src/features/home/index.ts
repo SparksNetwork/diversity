@@ -1,16 +1,16 @@
 import { Stream, never, combine, merge } from 'most';
-import { Pathname, Location } from '@motorcycle/history';
+import { Location, Path } from '@motorcycle/history';
 import { h2, a, div, p } from '@motorcycle/dom';
 import { MainSinks, MainSources } from '../../app';
 import { FirebaseUserChange } from '../../drivers/firebase-user';
 
 export function Home(sources: MainSources): MainSinks {
-  const connect$: Stream<Pathname> =
+  const connect$: Stream<Path> =
     sources.dom.select('a.connect').events('click')
       .tap(evt => evt.preventDefault())
       .map(() => '/connect');
 
-  const signin$: Stream<Pathname> =
+  const signin$: Stream<Path> =
     sources.dom.select('a.signin').events('click')
       .tap(evt => evt.preventDefault())
       .map(() => '/signin');
@@ -26,7 +26,7 @@ export function Home(sources: MainSources): MainSinks {
 
 function view(location: Location, user: FirebaseUserChange) {
   return div([
-    h2(`Home: ${location.pathname}`),
+    h2(`Home: ${location.path}`),
     div([
       a('.connect', { props: { href: '/connect' } }, 'Connect'),
       p(' | '),
