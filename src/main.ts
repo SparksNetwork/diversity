@@ -2,6 +2,8 @@ import { Stream } from 'most';
 import { Router } from '@motorcycle/router';
 import { MainSources, MainSinks } from './app';
 
+import { augmentWithAnchorClicks } from './augmenters';
+
 import { ConnectScreen } from './features/connect';
 import { SignInScreen } from './features/signin';
 import { Dash } from './features/dash';
@@ -10,10 +12,10 @@ import { Home } from './features/home';
 export function main(sources: MainSources): MainSinks {
   const sinks$: Stream<MainSinks> =
     Router({
-      '/': Home,
-      '/dash': Dash,
-      '/connect': ConnectScreen,
-      '/signin': SignInScreen,
+      '/': augmentWithAnchorClicks(Home),
+      '/dash': augmentWithAnchorClicks(Dash),
+      '/connect': augmentWithAnchorClicks(ConnectScreen),
+      '/signin': augmentWithAnchorClicks(SignInScreen),
     }, sources);
 
   return {
