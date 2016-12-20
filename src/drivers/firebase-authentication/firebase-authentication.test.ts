@@ -1,3 +1,4 @@
+/* tslint:disable:max-file-line-count */
 import * as assert from 'assert';
 import {
   CREATE_USER, AuthenticationType,
