@@ -13,16 +13,8 @@ const googleIcon = require('assets/images/google.svg');
 const facebookIcon = require('assets/images/facebook.svg');
 
 export function SignInScreen(sources: MainSources): MainSinks {
-  const redirectToDashboard$: Stream<Path> =
-    sources.isAuthenticated$.filter(Boolean).constant('/dash');
-
-  const nav$: Stream<Path> =
-    sources.dom.select('a').events('click')
-        .tap(evt => evt.preventDefault())
-        .map(ev => (ev.target as HTMLAnchorElement).pathname);
-
   const router: Stream<Path> =
-      merge(nav$, redirectToDashboard$);
+    sources.isAuthenticated$.filter(Boolean).constant('/dash');
 
   const googleClick$: Stream<Event> =
     sources.dom.select('.c-btn-federated--google').events('click')

@@ -1,25 +1,13 @@
-import { Stream, never, combine, merge } from 'most';
-import { Location, Path } from '@motorcycle/history';
+import { never, combine } from 'most';
+import { Location } from '@motorcycle/history';
 import { h2, a, div, p } from '@motorcycle/dom';
 import { MainSinks, MainSources } from '../../app';
 import { FirebaseUserChange } from '../../drivers/firebase-user';
 
 export function Home(sources: MainSources): MainSinks {
-  const connect$: Stream<Path> =
-    sources.dom.select('a.connect').events('click')
-      .tap(evt => evt.preventDefault())
-      .map(() => '/connect');
-
-  const signin$: Stream<Path> =
-    sources.dom.select('a.signin').events('click')
-      .tap(evt => evt.preventDefault())
-      .map(() => '/signin');
-
-  sources.user$.observe(u => console.log('userchange', u));
-
   return {
     dom: combine(view, sources.router.history(), sources.user$),
-    router: merge(connect$, signin$),
+    router: never(),
     authentication$: never(),
   };
 }
