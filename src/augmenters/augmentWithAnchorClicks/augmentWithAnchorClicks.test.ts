@@ -5,7 +5,7 @@ import { RouterInput, HistoryInput, Path } from '@motorcycle/router';
 import { augmentWithAnchorClicks } from './augmentWithAnchorClicks';
 import { DomSources } from '../../types';
 
-function Component (sources: DomSources) {
+function Component(sources: DomSources) {
   Function.prototype(sources);
   return {};
 }
@@ -56,10 +56,37 @@ describe('augmentWithAnchorClicks', () => {
           assert.strictEqual(sinks.other, otherSink);
         });
 
-        it('emits router changes on anchor clicks', (done) => {
-          const firstEventTarget = { target: { pathname: '/hello' } };
-          const secondEventTarget = { target: { pathname: '/world' } };
+        it('calls prevent default on events', () => {
+          let called = 0;
+          const event = {
+            preventDefault() { ++called; },
+            target: { pathname: '/hello' },
+          };
 
+          const domSource = mockDomSource({
+            A: {
+              click: just(event),
+            },
+          });
+
+          const AugmentedComponent = augmentWithAnchorClicks(Component);
+
+          const sinks = AugmentedComponent({ dom: domSource });
+
+          return sinks.router.take(1).drain().then(() => {
+            assert.strictEqual(called, 1);
+          });
+        });
+
+        it('emits router changes on anchor clicks', (done) => {
+          const firstEventTarget = {
+            preventDefault() { },
+            target: { pathname: '/hello' },
+          };
+          const secondEventTarget = {
+            preventDefault() { },
+            target: { pathname: '/world' },
+          };
 
           const domSource = mockDomSource({
             A: {
@@ -85,8 +112,14 @@ describe('augmentWithAnchorClicks', () => {
         });
 
         it('emits router changes on anchor touch events', (done) => {
-          const firstEventTarget = { target: { pathname: '/hello' } };
-          const secondEventTarget = { target: { pathname: '/world' } };
+          const firstEventTarget = {
+            preventDefault() { },
+            target: { pathname: '/hello' },
+          };
+          const secondEventTarget = {
+            preventDefault() { },
+            target: { pathname: '/world' },
+          };
 
           const domSource = mockDomSource({
             A: {
@@ -113,7 +146,10 @@ describe('augmentWithAnchorClicks', () => {
         });
 
         it('does not emit router changes no anchor touch events longer than 300 ms', (done) => {
-          const eventTarget = { target: { pathname: '/hello' } };
+          const eventTarget = {
+            preventDefault() {},
+            target: { pathname: '/hello' },
+          };
 
           const domSource = mockDomSource({
             A: {

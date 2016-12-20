@@ -1,4 +1,4 @@
-import { Stream, map, merge } from 'most';
+import { Stream, map, merge, tap } from 'most';
 import { Component, Sinks } from '@motorcycle/core';
 import { DomSource, query, events } from '@motorcycle/dom';
 import { Path, RouterInput } from '@motorcycle/router';
@@ -15,9 +15,9 @@ export function augmentWithAnchorClicks<Sources extends DomSources, ComponentSin
   {
     const anchor: DomSource = query('A', sources.dom);
 
-    const anchorClick$: Stream<Event> = click(anchor);
+    const anchorClick$: Stream<Event> = tap(preventDefault, click(anchor));
 
-    const anchorTap$: Stream<Event> = touchTap(anchor);
+    const anchorTap$: Stream<Event> = tap(preventDefault, touchTap(anchor));
 
     const path$: Stream<Path> =
       map(eventToPath, merge(anchorClick$, anchorTap$));
@@ -35,4 +35,8 @@ export function augmentWithAnchorClicks<Sources extends DomSources, ComponentSin
 
 function eventToPath(event: Event): Path {
   return (event.target as HTMLAnchorElement).pathname;
+}
+
+function preventDefault(event: Event) {
+  event.preventDefault();
 }
