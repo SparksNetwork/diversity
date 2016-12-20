@@ -1,6 +1,6 @@
 import { Stream, map, skipRepeats } from 'most';
 import hold from '@most/hold';
-import { run, Component } from '@motorcycle/core';
+import { run, Component, Sources, Sinks } from '@motorcycle/core';
 import { makeDomDriver, DomSource, VNode } from '@motorcycle/dom';
 import {
   routerDriver,
@@ -24,7 +24,7 @@ firebase.initializeApp(Sparks.firebase);
 
 require('./style.scss');
 
-export interface MainSources {
+export interface MainSources extends Sources {
   dom: DomSource;
   router: RouterSource;
   authentication$: Stream<Authentication>;
@@ -32,7 +32,7 @@ export interface MainSources {
   user$: Stream<FirebaseUserChange>;
 }
 
-export interface MainSinks {
+export interface MainSinks extends Sinks {
   dom: Stream<VNode>;
   router: RouterInput;
   authentication$: Stream<AuthenticationType>;
