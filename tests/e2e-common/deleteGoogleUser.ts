@@ -4,15 +4,17 @@ import * as admin from 'firebase-admin';
 
 export function deleteGoogleUser(_: any, done: Function) {
   (admin.auth() as any).getUserByEmail(process.env.GOOGLE_TEST_EMAIL)
-    .then((userRecord: any) => {
-      const uid: string = userRecord.uid;
-
-      (admin.auth() as any).deleteUser(uid)
-        .then(() => {
-          console.log(`Deleted ${process.env.GOOGLE_TEST_EMAIL} from database`);
-          done();
-        })
-        .catch(done);
+    .then((userRecord: any) => (admin.auth() as any).deleteUser(userRecord.uid))
+    .then(function () {
+      console.log(`Deleted ${process.env.GOOGLE_TEST_EMAIL} from database`);
+      done();
     })
-    .catch(done);
+    .catch(function (error: any) {
+      if (error.errorInfo && error.errorInfo.code === 'auth/user-not-found')
+        done()
+
+      console.log(`An error occured. Check your FIREBASE_ADMINSDK environment variables.`);
+
+      throw error;
+    });
 }
