@@ -3,7 +3,7 @@ language: node_js
 dist: trusty
 
 addons:
-  firfox: 'latest'
+  firefox: 'latest'
 
 node_js:
   - 6
