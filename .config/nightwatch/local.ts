@@ -15,6 +15,8 @@ const config = {
     },
   },
 
+  test_workers: true,
+
   test_settings: {
     default: {
       launch_url: 'http://localhost:8080',
