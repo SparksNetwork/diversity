@@ -11,7 +11,7 @@ export function deleteGoogleUser(_: any, done: Function) {
     })
     .catch(function (error: any) {
       if (error.errorInfo && error.errorInfo.code === 'auth/user-not-found')
-        done()
+        return done()
 
       console.log(`An error occured. Check your FIREBASE_ADMINSDK environment variables.`);
 
