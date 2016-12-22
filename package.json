@@ -29,6 +29,7 @@
     "start": "ts-node ./node_modules/.bin/webpack-dev-server --config .config/webpack.config.ts",
     "serve": "npm start",
     "serve-static": "pushstate-server dist 8080",
+    "test:ci": "npm test && npm run test:e2e",
     "test:lint": "tslint src/*.ts src/**/*.ts src/**/**/*.ts src/**/**/**/*.ts src/**/**/**/**/*.ts",
     "test:unit": "npm run clean && mocha-webpack --webpack-config .config/webpack.test.ts 'src/**/*.test.ts'",
     "test:int": "npm run clean && mocha-webpack --webpack-config .config/webpack.int.ts 'src/**/*.int.ts'",
