@@ -21,6 +21,7 @@ const config = {
       selenium_port: 4444,
       selenium_host: 'localhost',
       output_folder: './report',
+      firefox_profile: false,
       screenshots: {
         enabled: true,
         path: '.screens',
