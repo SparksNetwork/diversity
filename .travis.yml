@@ -16,6 +16,6 @@ before_install:
 
 before_script:
  - npm start &
- - sleep 10
+ - sleep 20
 
 script: npm run test:ci
