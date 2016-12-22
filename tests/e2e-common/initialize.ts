@@ -1,7 +1,5 @@
 import * as admin from 'firebase-admin';
 
-//const serviceAccount = require(process.env.FIREBASE_ADMINSDK_JSON);
-
 const serviceAccount: any =
   {
     type: process.env.FIREBASE_ADMINSDK_TYPE,
