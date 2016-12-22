@@ -46,14 +46,6 @@ const config = {
         acceptSslCerts: true,
       },
     },
-
-    firefox: {
-      desiredCapabilities: {
-        browserName: 'firefox',
-        javascriptEnabled: true,
-        acceptSslCerts: true,
-      },
-    },
   },
 };
 
