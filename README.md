@@ -55,14 +55,20 @@ been completed.
 5. In Firebase Admin SDK, click **GENERATE NEW PRIVATE KEY**. This will 
    download a JSON file with the service account settings.
 
-6. Store the file some place safe (outside from your local repo).
+6. Open the JSON file.
 
-7. Store the absolute path the your JSON file in environment variable 
-   **FIREBASE_ADMINSDK_JSON**
+7. For each key, add the key as an all-caps environment variable in the format:
+
+   `FIREBASE_ADMINSDK_{KEY}`
+
+   where `{KEY}` is the all-caps JSON key, assign it its corresponding value.
+
+   IMPORTANT! The `private_key` value must be enclosed in single-quotes `'` and
+   be immediately preceded by a `$`.
 
    Example:
 
-   `export FIREBASE_ADMINSDK_JSON=/home/user/sparks-integration-test-firebase-adminsdk.json`
+   `export FIREBASE_ADMINSDK_PRIVATE_KEY=$'-----BEGIN PRIVATE KEY-----\nMIIEvQIB ... =\n-----END PRIVATE KEY-----\n'`
 
 ## Environment Variables
 
