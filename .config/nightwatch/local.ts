@@ -40,9 +40,9 @@ const config = {
     firefox: {
       desiredCapabilities: {
         browserName: 'firefox',
-      }
-    }
+      },
+    },
   },
 };
 
-export = config;
+module.exports = config;

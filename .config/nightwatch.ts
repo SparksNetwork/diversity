@@ -2,7 +2,7 @@ const config = process.env.LOCAL
   ? require('./nightwatch/local.ts')
   : require('./nightwatch/sauce.ts');
 
-export = (function (settings) {
+module.exports = (function (settings) {
   if (process.platform === 'win32')
     settings.selenium.cli_args['webdriver.chrome.driver'] =
       './node_modules/.bin/chromedriver.cmd';
