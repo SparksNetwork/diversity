@@ -19,6 +19,7 @@
       "mocha",
       "node",
       "ramda",
+      "sinon",
       "webpack",
       "webpack-dev-server"
     ],
@@ -30,6 +31,7 @@
   },
   "include": [
     "../custom-typings/*.d.ts",
+    "./page-objects/**/*.ts",
     "./e2e/*.ts"
   ]
 }
