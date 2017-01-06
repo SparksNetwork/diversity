@@ -1,22 +1,26 @@
-import { Stream, map, skipRepeats } from 'most';
-import hold from '@most/hold';
-import { run, Component, Sources, Sinks } from '@motorcycle/core';
-import { makeDomDriver, DomSource, VNode } from '@motorcycle/dom';
-import {
-  routerDriver,
-  RouterSource,
-  RouterInput,
-} from '@motorcycle/router';
+const i18nXhr = require('i18next-xhr-backend').default;
+
 import {
   Authentication,
   AuthenticationType,
   makeFirebaseAuthenticationDriver,
 } from './drivers/firebase-authentication';
-
+import { Component, Sinks, Sources, run } from '@motorcycle/core';
+import { DomSource, VNode, makeDomDriver } from '@motorcycle/dom';
 import {
-  makeFirebaseUserDriver,
   FirebaseUserChange,
+  makeFirebaseUserDriver,
 } from './drivers/firebase-user';
+import { I18nSource, makeI18nDriver } from '@motorcycle/i18n';
+import {
+  RouterInput,
+  RouterSource,
+  routerDriver,
+} from '@motorcycle/router';
+import { Stream, map, skipRepeats } from 'most';
+
+import hold from '@most/hold';
+import { main } from './main';
 
 import firebase = require('firebase');
 declare const Sparks: any;
@@ -27,6 +31,7 @@ require('./style.scss');
 export interface MainSources extends Sources {
   dom: DomSource;
   router: RouterSource;
+  i18n: I18nSource;
   authentication$: Stream<Authentication>;
   isAuthenticated$: Stream<boolean>;
   user$: Stream<FirebaseUserChange>;
@@ -35,18 +40,24 @@ export interface MainSources extends Sources {
 export interface MainSinks extends Sinks {
   dom: Stream<VNode>;
   router: RouterInput;
+  i18n: Stream<string>;
   authentication$: Stream<AuthenticationType>;
 }
-
-import { main } from './main';
 
 const auth = firebase.auth();
 
 const rootElement: HTMLElement = document.querySelector('#app') as HTMLElement;
 
+const i18nOptions: any =
+  {
+    load: `currentOnly`,
+    fallbackLng: false,
+  };
+
 run<MainSources, MainSinks>(augmentWithIsAuthenticated$(main), {
   dom: makeDomDriver(rootElement),
   router: routerDriver,
+  i18n: makeI18nDriver([i18nXhr], i18nOptions),
   authentication$: makeFirebaseAuthenticationDriver(firebase),
   user$: makeFirebaseUserDriver(listener => auth.onAuthStateChanged(listener)),
 });
