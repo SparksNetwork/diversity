@@ -1,9 +1,7 @@
-import { connectElements, emails, pages, passwords } from '../common/identity-and-authorization';
+ import { connectElements, emails, pages, passwords } from '../common/identity-and-authorization';
+ import { deleteUser} from '../common';
 
-import { deleteUser } from '../common';
-
-export = function () {
-
+export = function test() {
   this.Given('I’m not connected with {provider:stringInDoubleQuotes}',
     function (provider: string, done: Function) {
       deleteUser(emails[provider], done);
@@ -91,6 +89,5 @@ export = function () {
     signIn
       .click('@connectLink');
   });
-
 
 }
