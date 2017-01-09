@@ -4,7 +4,7 @@ Feature: identity and authorization
   I want to identify myself
   So I can be authorized to use the application
 
-@noci
+@wip @noci
 Scenario: Connect with Google
   Given I’m not connected with "Google"
    When I navigate to the "Connect" URL
@@ -17,6 +17,7 @@ Scenario: Connect with Google
    Then I’m taken to my dashboard
     And I am signed in
 
+@wip
 Scenario: Connect with Facebook
   Given I’m not connected with "Facebook"
    When I navigate to the "Connect" URL
@@ -28,7 +29,7 @@ Scenario: Connect with Facebook
    Then I’m taken to my dashboard
     And I am signed in
 
-@wip @noci
+@wip
 Scenario: Connect with email and password
   Given I’m not connected with "email and password"
    When I navigate to the "Connect" URL
@@ -38,7 +39,7 @@ Scenario: Connect with email and password
    Then I’m taken to my dashboard
     And I am signed in
 
-@wip @noci
+@noci
 Scenario: Connect with existing email and password
   Given I’m already connected with "email and password"
    When I navigate to the "Connect" URL
@@ -73,12 +74,14 @@ Scenario: Missing password connecting with email and password
     And I click the "Connect" submit button
    Then I see missing-password error message
 
+@wip
 Scenario: Switch to sign-in from connect
   Given I’m not signed in
    When I navigate to the "Connect" URL
     And I click the sign-in link
    Then I’m taken to the "Sign in" URL
 
+@wip
 Scenario: Switch to connect from sign-in
   Given I’m not signed in
    When I navigate to the "Sign in" URL
