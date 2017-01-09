@@ -1,9 +1,13 @@
-import { connectElements, emails, pages, passwords } from '../common/identity-and-authorization';
+import {
+  connectElements,
+  emails,
+  pages,
+  passwords,
+  errors
+} from '../common/identity-and-authorization';
+import { deleteUser, deleteIfExistsAndRecreateUser } from '../common';
 
-import { deleteUser } from '../common';
-
-export = function () {
-
+export = function test() {
   this.Given('I’m not connected with {provider:stringInDoubleQuotes}',
     function (provider: string, done: Function) {
       deleteUser(emails[provider], done);
@@ -92,5 +96,24 @@ export = function () {
       .click('@connectLink');
   });
 
+  this.Given('I’m already connected with {provider:stringInDoubleQuotes}',
+    function (provider: string, done: Function) {
+      deleteIfExistsAndRecreateUser(emails[provider], passwords[provider], done);
+    });
 
+  this.When('On the same {route:stringInDoubleQuotes} URL, I enter a wrong password',
+    function (provider: string) {
+      pages(this)[provider]
+        .waitForElementPresent('@passwordField')
+        .setValue('@passwordField', passwords[provider] + 'dummy');
+    });
+
+  this.Then('On the same {route:stringInDoubleQuotes} URL, I see wrong-password error message',
+    function (route: string) {
+      pages(this)[route]
+        .waitForElementPresent('@errorField')
+        .assert.containsText('@errorField', errors.wrongPassword);
+
+      this.end();
+    });
 }
