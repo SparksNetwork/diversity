@@ -17,16 +17,25 @@ export = {
       selector: `.c-btn-federated--facebook`,
     },
     emailField: {
-      selector: `#Email`,
+      selector: `.c-textfield__input--email`,
+    },
+    invalidEmailField: {
+      selector: `.c-textfield__input--email:invalid`,
     },
     passwordField: {
-      selector: `#Passwd`,
+      selector: `.c-textfield__input--password`,
+    },
+    invalidPasswordField: {
+      selector: `.c-textfield__input--password:invalid`,
     },
     submitButton: {
-      selector: `#signIn`,
+      selector: `.c-btn.c-btn--primary.c-sign-in__submit`,
     },
     signInLink: {
       selector: `a[href^='/signin']`,
     },
-  },
+    errorField : {
+      selector : '.c-textfield.c-textfield--errorfield',
+    },
+},
 };
